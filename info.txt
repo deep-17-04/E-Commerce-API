@@ -1,0 +1,32 @@
+Morgan package helps us to log the info about the request during development 
+
+Alernative Approach : We use the validator package to validate the email address
+
+COOKIES:
+1) We are using the cookies to store jwt token.
+2) Only the browser can access the token using cookie
+3) We use the cookie-parser and it set the cookies send by the browser in the req.cookies obj
+4) If we use signed in utils we need to specify it in the middleware and the cookies are in req.signedCookies
+
+POPULATE METHOD:
+1) We can get the information about the product or user with id
+2) We need to use the .populate method in the review or any controller
+
+MONGOOSE VIRTUALS:
+1) They are properties that don't exist or not stored but used logically
+2) toJSON: { virtuals: true }, toObject: { virtuals: true } }) in Product model
+3) Create the ProductSchema.virtual('')
+
+The reason for using product.remove() is that we can remove all the reviews associated with the product
+
+AGGREGATE PIPELINES:
+1) Go to Aggregation in Atlas 
+2) Select the $match property
+3) In the query use the "product":ObjectId('')
+4) Add the Stage and select $group property
+5) Add the id: and create the fields
+Ex.{
+  _id: null,
+  averageRating: {$avg: "$rating"},
+  numOfReviews: {$sum : 1}
+}
